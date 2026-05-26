@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Casa Dentalis — Digital Audit · Берлин 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07070f;
+  --bg2:#0b0b18;
+  --bg3:#0f0f20;
+  --card:rgba(255,255,255,.03);
+  --card-border:rgba(255,255,255,.06);
+  --blue:#1a56cc;
+  --blue-l:#4d7de8;
+  --blue-dim:rgba(26,86,204,.15);
+  --blue-glow:rgba(26,86,204,.3);
+  --text:#e8e6f0;
+  --text2:rgba(232,230,240,.55);
+  --text3:rgba(232,230,240,.25);
+  --green:#34d17a;
+  --green-bg:rgba(52,209,122,.1);
+  --red:#ff4d4d;
+  --red-bg:rgba(255,77,77,.1);
+  --amber:#f5a623;
+  --amber-bg:rgba(245,166,35,.1);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --sidebar:260px;
+  --content:760px;
+}
+
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-weight:300;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+/* ─── PROGRESS BAR ─── */
+#progress{
+  position:fixed;top:0;left:0;height:2px;width:0;
+  background:linear-gradient(90deg,var(--blue),var(--blue-l));
+  z-index:1000;
+  box-shadow:0 0 10px var(--blue-glow);
+  transition:width .1s linear;
+}
+
+/* ─── SIDEBAR NAV ─── */
+#sidebar{
+  position:fixed;top:0;left:0;bottom:0;
+  width:var(--sidebar);
+  background:var(--bg2);
+  border-right:1px solid var(--card-border);
+  padding:40px 0;
+  display:flex;flex-direction:column;
+  z-index:100;
+  overflow-y:auto;
+}
+#sidebar::-webkit-scrollbar{width:0}
+.sidebar-logo{
+  padding:0 28px 32px;
+  border-bottom:1px solid var(--card-border);
+  margin-bottom:24px;
+}
+.sidebar-logo-name{
+  font-family:var(--serif);
+  font-size:18px;
+  font-weight:600;
+  color:var(--text);
+  letter-spacing:.5px;
+  line-height:1.3;
+}
+.sidebar-logo-sub{
+  font-size:10px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--blue-l);
+  margin-top:4px;
+}
+nav.sidebar-nav{flex:1}
+.nav-section{
+  font-size:10px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:var(--text3);
+  padding:0 28px;
+  margin:16px 0 8px;
+}
+.nav-link{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 28px;
+  font-size:12.5px;
+  color:var(--text2);
+  text-decoration:none;
+  transition:all .2s;
+  position:relative;
+  letter-spacing:.2px;
+}
+.nav-link .nav-num{
+  font-size:10px;
+  color:var(--text3);
+  font-variant-numeric:tabular-nums;
+  min-width:16px;
+}
+.nav-link:hover{color:var(--text);background:var(--card)}
+.nav-link.active{
+  color:var(--blue-l);
+  background:var(--blue-dim);
+}
+.nav-link.active::before{
+  content:'';
+  position:absolute;left:0;top:4px;bottom:4px;
+  width:2px;background:var(--blue);
+  border-radius:0 1px 1px 0;
+}
+.sidebar-footer{
+  padding:20px 28px 0;
+  border-top:1px solid var(--card-border);
+  font-size:11px;
+  color:var(--text3);
+  line-height:1.5;
+}
+
+/* ─── MAIN CONTENT ─── */
+main{
+  margin-left:var(--sidebar);
+  min-height:100vh;
+}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:80px 72px;
+  position:relative;
+  overflow:hidden;
+  background:var(--bg);
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(26,86,204,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,86,204,.04) 1px, transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+.hero-glow{
+  position:absolute;
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(26,86,204,.12) 0%,transparent 65%);
+  top:-200px;right:-200px;
+  border-radius:50%;
+  pointer-events:none;
+  animation:pulse 8s ease-in-out infinite alternate;
+}
+@keyframes pulse{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.15) translate(-30px,40px)}}
+.hero-glow2{
+  position:absolute;
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(26,86,204,.07) 0%,transparent 65%);
+  bottom:-100px;left:100px;
+  border-radius:50%;
+  pointer-events:none;
+  animation:pulse2 10s ease-in-out infinite alternate;
+}
+@keyframes pulse2{0%{transform:scale(1)}100%{transform:scale(1.2) translate(20px,-20px)}}
+
+.hero-inner{position:relative;max-width:680px}
+.hero-eyebrow{
+  font-size:11px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--blue-l);
+  margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;
+}
+.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--blue-l)}
+.hero-h1{
+  font-family:var(--serif);
+  font-size:clamp(42px,5vw,64px);
+  font-weight:300;
+  line-height:1.15;
+  color:#fff;
+  margin-bottom:12px;
+  letter-spacing:-.5px;
+}
+.hero-h1 em{
+  font-style:italic;
+  color:var(--blue-l);
+}
+.hero-sub{
+  font-size:16px;
+  color:var(--text2);
+  margin-bottom:36px;
+  font-weight:300;
+}
+.hero-badges{
+  display:flex;flex-wrap:wrap;gap:10px;
+  margin-bottom:48px;
+}
+.badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;
+  background:var(--blue-dim);
+  border:1px solid rgba(26,86,204,.3);
+  border-radius:20px;
+  font-size:12px;
+  color:var(--blue-l);
+  letter-spacing:.3px;
+}
+.badge-icon{font-size:14px}
+.hero-summary{
+  padding:24px 28px;
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-left:3px solid var(--blue);
+  border-radius:0 8px 8px 0;
+}
+.hero-summary p{font-size:15px;color:var(--text2);line-height:1.7;margin-bottom:10px}
+.hero-summary p:last-child{margin-bottom:0}
+.hero-summary strong{color:var(--text);font-weight:500}
+.hero-scroll{
+  position:absolute;bottom:48px;left:72px;
+  display:flex;align-items:center;gap:10px;
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);
+  animation:bob 2s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+.hero-scroll::before{content:'↓';font-size:16px}
+
+/* ─── SECTION WRAPPER ─── */
+.section{
+  padding:80px 72px;
+  border-top:1px solid var(--card-border);
+  opacity:0;transform:translateY(24px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.section.visible{opacity:1;transform:none}
+
+.section-label{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--blue-l);margin-bottom:12px;
+  display:flex;align-items:center;gap:10px;
+}
+.section-label::before{content:'';width:20px;height:1px;background:var(--blue)}
+.section-h{
+  font-family:var(--serif);
+  font-size:clamp(32px,3.5vw,44px);
+  font-weight:400;
+  line-height:1.2;
+  color:#fff;
+  margin-bottom:32px;
+  letter-spacing:-.3px;
+}
+.section-h em{font-style:italic;color:var(--blue-l)}
+.section-intro{
+  font-size:15px;color:var(--text2);line-height:1.75;
+  max-width:640px;margin-bottom:40px;
+}
+
+/* ─── STRENGTH / WEAKNESS ROWS ─── */
+.sw-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:48px}
+.sw-col{}
+.sw-col-title{
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;
+}
+.sw-col-title.green{color:var(--green)}
+.sw-col-title.red{color:var(--red)}
+.sw-item{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:10px 14px;
+  border-radius:6px;
+  font-size:13.5px;line-height:1.55;
+  margin-bottom:8px;
+}
+.sw-item.ok{background:var(--green-bg);color:rgba(232,230,240,.85)}
+.sw-item.warn{background:var(--red-bg);color:rgba(232,230,240,.85)}
+.sw-item .sw-icon{flex-shrink:0;margin-top:1px;font-size:13px}
+
+/* ─── SUBSECTION ─── */
+.subsection{
+  margin-bottom:56px;
+  padding-bottom:56px;
+  border-bottom:1px solid var(--card-border);
+}
+.subsection:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.sub-h{
+  font-family:var(--serif);
+  font-size:24px;font-weight:500;
+  color:#fff;margin-bottom:8px;
+  letter-spacing:-.2px;
+}
+.sub-h .sub-num{
+  font-size:13px;font-family:var(--sans);
+  color:var(--blue-l);font-weight:400;
+  margin-right:8px;font-style:normal;
+}
+.sub-num-tag{
+  font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--blue-l);margin-bottom:10px;
+}
+.sub-analysis{
+  font-size:14px;color:var(--text2);line-height:1.7;
+  max-width:600px;margin-bottom:20px;
+}
+
+/* ─── SCREENSHOT ─── */
+.screenshot-wrap{
+  margin:20px 0;
+  border-radius:10px;
+  overflow:hidden;
+  border:1px solid var(--card-border);
+  background:var(--bg3);
+  position:relative;
+}
+.screenshot-wrap img{
+  width:100%;display:block;
+  transition:transform .4s ease;
+  cursor:zoom-in;
+}
+.screenshot-wrap:hover img{transform:scale(1.01)}
+.screenshot-caption{
+  padding:10px 16px;
+  font-size:11.5px;
+  color:var(--text3);
+  background:rgba(0,0,0,.3);
+  border-top:1px solid var(--card-border);
+  letter-spacing:.2px;
+}
+.screenshots-row{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0;
+}
+.screenshots-row.three{grid-template-columns:1fr 1fr 1fr}
+
+/* Status badge */
+.status-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:4px 12px;border-radius:20px;
+  font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  font-weight:500;margin-bottom:12px;
+}
+.status-badge.green{background:var(--green-bg);color:var(--green);border:1px solid rgba(52,209,122,.2)}
+.status-badge.red{background:var(--red-bg);color:var(--red);border:1px solid rgba(255,77,77,.2)}
+.status-badge.amber{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(245,166,35,.2)}
+
+/* ─── TABLE ─── */
+.tbl-wrap{overflow-x:auto;margin:24px 0}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{
+  padding:10px 14px;text-align:left;
+  background:rgba(26,86,204,.12);
+  color:var(--blue-l);
+  font-weight:500;font-size:11px;letter-spacing:1px;text-transform:uppercase;
+  border-bottom:1px solid rgba(26,86,204,.2);
+}
+tbody td{
+  padding:10px 14px;
+  border-bottom:1px solid var(--card-border);
+  color:var(--text2);
+  vertical-align:top;
+}
+tbody tr:hover td{background:var(--card)}
+.td-cd{color:var(--text);font-weight:500}
+.td-good{color:var(--green)}
+.td-bad{color:var(--red)}
+.td-amber{color:var(--amber)}
+
+/* ─── COMPETITOR CARD ─── */
+.comp-card{
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-radius:12px;
+  padding:28px;
+  margin-bottom:28px;
+  transition:border-color .2s;
+}
+.comp-card:hover{border-color:rgba(26,86,204,.3)}
+.comp-name{
+  font-family:var(--serif);
+  font-size:22px;font-weight:500;
+  color:#fff;margin-bottom:4px;
+}
+.comp-addr{font-size:12px;color:var(--text3);margin-bottom:16px;letter-spacing:.2px}
+.comp-meta{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  margin-bottom:20px;
+}
+.comp-meta-item{
+  background:var(--bg2);
+  border:1px solid var(--card-border);
+  border-radius:8px;
+  padding:12px 14px;
+}
+.comp-meta-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
+.comp-meta-val{font-size:13px;color:var(--text2);line-height:1.5}
+.comp-threat{
+  padding:12px 16px;
+  background:var(--red-bg);
+  border:1px solid rgba(255,77,77,.15);
+  border-radius:6px;
+  font-size:13px;color:rgba(255,180,180,.9);
+  margin-bottom:20px;
+}
+.comp-threat::before{content:'⚡ Угроза: ';font-weight:600;color:var(--red)}
+
+/* ─── CALLOUT ─── */
+.callout{
+  padding:20px 24px;
+  border-radius:8px;
+  margin:24px 0;
+}
+.callout.red{background:var(--red-bg);border:1px solid rgba(255,77,77,.2)}
+.callout.blue{background:var(--blue-dim);border:1px solid rgba(26,86,204,.25)}
+.callout.green{background:var(--green-bg);border:1px solid rgba(52,209,122,.2)}
+.callout.amber{background:var(--amber-bg);border:1px solid rgba(245,166,35,.2)}
+.callout p{font-size:14px;line-height:1.7;font-style:italic;color:var(--text)}
+.callout p strong{color:#fff;font-weight:600;font-style:normal}
+
+/* ─── AI SECTION SPECIFICS ─── */
+.ai-gap-list{list-style:none;margin:20px 0 32px}
+.ai-gap-list li{
+  padding:12px 16px 12px 40px;
+  margin-bottom:8px;
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-radius:6px;
+  font-size:13.5px;color:var(--text2);
+  line-height:1.55;
+  position:relative;
+}
+.ai-gap-list li::before{
+  content:'→';
+  position:absolute;left:14px;top:13px;
+  color:var(--blue-l);font-size:14px;
+}
+
+/* ─── 90-DAY PLAN ─── */
+.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px}
+.plan-phase{
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-radius:12px;
+  padding:24px;
+  transition:border-color .2s,transform .2s;
+}
+.plan-phase:hover{border-color:rgba(26,86,204,.3);transform:translateY(-2px)}
+.plan-phase-label{
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--blue-l);margin-bottom:6px;
+}
+.plan-phase-title{
+  font-family:var(--serif);
+  font-size:20px;font-weight:500;color:#fff;
+  margin-bottom:20px;line-height:1.3;
+}
+.plan-item{
+  display:flex;align-items:flex-start;gap:10px;
+  margin-bottom:12px;
+  font-size:13px;color:var(--text2);line-height:1.55;
+}
+.plan-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--blue-l);flex-shrink:0;margin-top:6px;
+}
+
+/* ─── KEY TAKEAWAYS ─── */
+.takeaway-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.takeaway-card{
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-radius:12px;padding:24px;
+  transition:all .2s;
+}
+.takeaway-card:hover{border-color:var(--blue);background:var(--blue-dim)}
+.takeaway-num{
+  font-family:var(--serif);font-size:40px;font-weight:300;
+  color:rgba(26,86,204,.3);line-height:1;margin-bottom:12px;
+}
+.takeaway-title{
+  font-family:var(--serif);font-size:20px;font-weight:500;
+  color:#fff;margin-bottom:10px;line-height:1.3;
+}
+.takeaway-body{font-size:13.5px;color:var(--text2);line-height:1.65}
+.takeaway-card.featured{
+  grid-column:1/-1;
+  background:var(--blue-dim);
+  border-color:rgba(26,86,204,.3);
+  display:flex;align-items:center;gap:32px;
+}
+.takeaway-card.featured .takeaway-num{font-size:60px;color:rgba(26,86,204,.4)}
+
+/* ─── FOOTER ─── */
+footer{
+  padding:40px 72px;
+  border-top:1px solid var(--card-border);
+  font-size:12px;color:var(--text3);
+  display:flex;justify-content:space-between;align-items:center;
+  letter-spacing:.3px;
+}
+
+/* ─── LIGHTBOX ─── */
+#lightbox{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.92);z-index:999;
+  justify-content:center;align-items:center;
+  cursor:zoom-out;
+}
+#lightbox.open{display:flex}
+#lightbox img{
+  max-width:90vw;max-height:90vh;
+  border-radius:8px;
+  box-shadow:0 40px 120px rgba(0,0,0,.8);
+}
+#lb-close{
+  position:fixed;top:24px;right:32px;
+  font-size:28px;color:var(--text2);cursor:pointer;
+  background:none;border:none;
+  transition:color .2s;
+}
+#lb-close:hover{color:#fff}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  :root{--sidebar:0px}
+  #sidebar{display:none}
+  main{margin-left:0}
+  .hero,.section{padding:60px 28px}
+  .sw-grid{grid-template-columns:1fr}
+  .screenshots-row,.screenshots-row.three{grid-template-columns:1fr}
+  .comp-meta{grid-template-columns:1fr}
+  .plan-grid{grid-template-columns:1fr}
+  .takeaway-grid{grid-template-columns:1fr}
+  .takeaway-card.featured{flex-direction:column;gap:16px}
+  footer{flex-direction:column;gap:8px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button id="lb-close" onclick="closeLB()">×</button>
+  <img id="lb-img" src="" alt=""/>
+</div>
+
+<!-- SIDEBAR -->
+<aside id="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-name">Casa Dentalis</div>
+    <div class="sidebar-logo-sub">Digital Audit 2026</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">Содержание</div>
+    <a href="#hero" class="nav-link active"><span class="nav-num">00</span>Резюме</a>
+    <a href="#site-audit" class="nav-link"><span class="nav-num">01</span>Аудит сайта</a>
+    <a href="#google" class="nav-link"><span class="nav-num">02</span>Видимость в Google</a>
+    <a href="#competitors" class="nav-link"><span class="nav-num">03</span>Конкуренты</a>
+    <a href="#maps" class="nav-link"><span class="nav-num">04</span>Google Maps</a>
+    <a href="#ai" class="nav-link"><span class="nav-num">05</span>AI/GEO-аудит</a>
+    <a href="#hiring" class="nav-link"><span class="nav-num">06</span>Найм</a>
+    <a href="#plan" class="nav-link"><span class="nav-num">07</span>90 дней</a>
+    <a href="#summary" class="nav-link"><span class="nav-num">08</span>Ключевые тезисы</a>
+  </nav>
+  <div class="sidebar-footer">
+    Конфиденциально<br>Берлин, май 2026
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main>
+
+<!-- ══════════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════════ -->
+<section id="hero" class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Digital Audit</div>
+    <h1 class="hero-h1">Casa Dentalis —<br><em>Анализ цифровой среды</em></h1>
+    <p class="hero-sub">Аудит сайта, конкурентов и видимости в Google · Берлин, май 2026</p>
+    <div class="hero-badges">
+      <span class="badge"><span class="badge-icon">🏥</span>6 клиник</span>
+      <span class="badge"><span class="badge-icon">📅</span>30+ лет</span>
+      <span class="badge"><span class="badge-icon">👥</span>100 000+ пациентов</span>
+      <span class="badge"><span class="badge-icon">💎</span>Nobel Biocare Diamond</span>
+      <span class="badge"><span class="badge-icon">⭐</span>5★ рейтинг</span>
+    </div>
+    <div class="hero-summary">
+      <p><strong>Фундамент бренда — один из сильнейших на рынке.</strong> 6 клиник в премиальных районах, собственная Zahnklinik с операционными залами, собственная лаборатория, семейный бизнес с 30-летней историей.</p>
+      <p>Главная проблема: digital-упаковка не соответствует уровню клиники. Конкуренты уже забирают видимость и заявки по имплантам, Invisalign и винирам — пока Casa Dentalis практически не виден в этих сегментах онлайн.</p>
+    </div>
+  </div>
+  <div class="hero-scroll">Листать</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     1. АУДИТ САЙТА
+════════════════════════════════════════════════════════ -->
+<section id="site-audit" class="section">
+  <div class="section-label">01</div>
+  <h2 class="section-h">Аудит <em>сайта</em></h2>
+  <p class="section-intro">Оцениваем сайт с точки зрения конверсии и готовности к платному трафику — не «на красоту», а на заявки.</p>
+
+  <div class="sw-grid">
+    <div class="sw-col">
+      <div class="sw-col-title green">✔ Сильные стороны</div>
+      <div class="sw-item ok"><span class="sw-icon">✔</span>Отдельные страницы под все основные услуги</div>
+      <div class="sw-item ok"><span class="sw-icon">✔</span>Телефон и кнопка записи видны в шапке на всех страницах</div>
+      <div class="sw-item ok"><span class="sw-icon">✔</span>Онлайн-запись на приём работает</div>
+      <div class="sw-item ok"><span class="sw-icon">✔</span>Сайт доступен на немецком и английском языках</div>
+    </div>
+    <div class="sw-col">
+      <div class="sw-col-title red">✗ Проблемы</div>
+      <div class="sw-item warn"><span class="sw-icon">✗</span>Страница Invisalign — архив статей 2019–2021 года без оффера, цен и CTA</div>
+      <div class="sw-item warn"><span class="sw-icon">✗</span>Страница вениров — нет фото «до/после», нет цен, нет конкретного CTA</div>
+      <div class="sw-item warn"><span class="sw-icon">✗</span>Страница эстетики — нет кейсов, нет имён врачей, нет ориентиров по стоимости</div>
+      <div class="sw-item warn"><span class="sw-icon">✗</span>Ни на одной высокомаржинальной услуге нет цен или ценового ориентира</div>
+      <div class="sw-item warn"><span class="sw-icon">✗</span>Нет выделенного CTA «бесплатная консультация» под каждое дорогое направление</div>
+    </div>
+  </div>
+
+  <!-- 2.1 Invisalign -->
+  <div class="subsection">
+    <div class="sub-num-tag">2.1</div>
+    <h3 class="sub-h">Страница Invisalign — главная слабость</h3>
+    <p class="sub-analysis">Пациент по запросу «Invisalign Berlin» не видит ни оффера, ни цены, ни формы записи. Прямой конкурент BISS45 показывает цены от 150 €/мес, бесплатный 3D-скан и 6 кнопок записи на одной странице.</p>
+    <div class="screenshot-wrap">
+      <img src="img/image1.png" alt="Страница Invisalign Casa Dentalis" onclick="openLB(this)"/>
+      <div class="screenshot-caption">casa-dentalis.de/invisalign/ — вместо конверсионного лендинга архив статей 2019 и 2021 года</div>
+    </div>
+  </div>
+
+  <!-- 2.2 Veneers -->
+  <div class="subsection">
+    <div class="sub-num-tag">2.2</div>
+    <h3 class="sub-h">Страница вениров</h3>
+    <p class="sub-analysis">Описывает процедуру текстом, но не даёт пациенту ключевого контента для принятия решения: нет фото «до/после», нет ценового ориентира, нет имён врачей с опытом в косметической стоматологии.</p>
+    <div class="screenshot-wrap">
+      <img src="img/image2.png" alt="Страница вениров" onclick="openLB(this)"/>
+      <div class="screenshot-caption">casa-dentalis.de/veneers-berlin/ — нет before/after и нет цен</div>
+    </div>
+  </div>
+
+  <!-- 2.3 Aesthetic -->
+  <div class="subsection">
+    <div class="sub-num-tag">2.3</div>
+    <h3 class="sub-h">Страница эстетической стоматологии</h3>
+    <p class="sub-analysis">Перечисляет услуги, но не продаёт их. Нет социального доказательства, нет имён специалистов, нет кейсов. Пациент с запросом на смайл-дизайн не получает ответа на вопрос «почему именно Casa Dentalis».</p>
+    <div class="screenshot-wrap">
+      <img src="img/image3.png" alt="Страница эстетики" onclick="openLB(this)"/>
+      <div class="screenshot-caption">zahnaesthetik-in-berlin/ — общее описание без кейсов</div>
+    </div>
+  </div>
+
+  <!-- 2.4 Implants -->
+  <div class="subsection">
+    <div class="sub-num-tag">2.4</div>
+    <h3 class="sub-h">Страница имплантов — наиболее сильная</h3>
+    <p class="sub-analysis">Лучшая страница на сайте: Nobel Biocare Diamond статус, разница между титановыми и керамическими имплантами, несколько точек записи. Недостаёт: ценового ориентира «от…», фото работ, истории конкретного пациента.</p>
+    <div class="screenshot-wrap">
+      <img src="img/image4.png" alt="Страница имплантов" onclick="openLB(this)"/>
+      <div class="screenshot-caption">en/dental-implants/ — лучшая страница, но без цен и кейсов</div>
+    </div>
+  </div>
+
+  <!-- 2.5 Table -->
+  <div class="sub-num-tag">2.5 — Сводная таблица</div>
+  <h3 class="sub-h" style="margin-bottom:16px">Готовность посадочных страниц к платному трафику</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr>
+        <th>Направление</th><th>Страница</th><th>Цены?</th><th>Before/After?</th><th>Конверс. CTA?</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Импланты</td><td class="td-good">Есть</td><td class="td-bad">—</td><td class="td-bad">—</td><td class="td-amber">Частично</td></tr>
+        <tr><td>Invisalign</td><td class="td-bad">Только блог</td><td class="td-bad">—</td><td class="td-bad">—</td><td class="td-bad">—</td></tr>
+        <tr><td>Виниры</td><td class="td-good">Есть</td><td class="td-bad">—</td><td class="td-bad">—</td><td class="td-good">Есть</td></tr>
+        <tr><td>Эстетика</td><td class="td-good">Есть</td><td class="td-bad">—</td><td class="td-bad">—</td><td class="td-good">Есть</td></tr>
+        <tr><td>Emergency</td><td class="td-good">Есть</td><td>—</td><td>—</td><td class="td-good">Есть</td></tr>
+        <tr><td>Angstpatient</td><td class="td-bad">Не выделена</td><td class="td-bad">—</td><td class="td-bad">—</td><td class="td-bad">—</td></tr>
+        <tr><td>English / Expats</td><td class="td-amber">EN-версия есть</td><td class="td-bad">—</td><td class="td-bad">—</td><td class="td-amber">Частично</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     2. GOOGLE VISIBILITY
+════════════════════════════════════════════════════════ -->
+<section id="google" class="section">
+  <div class="section-label">02</div>
+  <h2 class="section-h">Видимость <em>в Google</em></h2>
+  <p class="section-intro">Проверены основные коммерческие запросы, по которым берлинские пациенты ищут стоматологические услуги. Скрины сделаны в режиме инкогнито.</p>
+
+  <!-- 3.1 -->
+  <div class="subsection">
+    <h3 class="sub-h"><span class="sub-num">3.1</span>«Zahnarzt Berlin»</h3>
+    <p class="sub-analysis">Самый высококонкурентный запрос. В рекламном блоке доминируют крупные сети (AllDent, Dental21, KU64). Без отдельных рекламных кампаний Casa Dentalis теряет значительную часть трафика по базовому запросу.</p>
+    <div class="screenshots-row three">
+      <div class="screenshot-wrap"><img src="img/image5.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Рекламный блок</div></div>
+      <div class="screenshot-wrap"><img src="img/image6.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Органическая выдача</div></div>
+      <div class="screenshot-wrap"><img src="img/image7.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Maps / Local</div></div>
+    </div>
+  </div>
+
+  <!-- 3.2 -->
+  <div class="subsection">
+    <h3 class="sub-h"><span class="sub-num">3.2</span>«Zahnimplantate Berlin»</h3>
+    <p class="sub-analysis">Высокомаржинальный запрос с ценой клика 8–25 €. Пациенты, ищущие импланты, — наиболее ценная аудитория. Без рекламы и оптимизированного лендинга Casa Dentalis практически не виден.</p>
+    <div class="screenshots-row">
+      <div class="screenshot-wrap"><img src="img/image8.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Органика и реклама</div></div>
+      <div class="screenshot-wrap"><img src="img/image9.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Maps-блок</div></div>
+    </div>
+  </div>
+
+  <!-- 3.3 -->
+  <div class="subsection">
+    <h3 class="sub-h"><span class="sub-num">3.3</span>«Invisalign Berlin»</h3>
+    <p class="sub-analysis">BISS45 и KU64 занимают топовые позиции в рекламе. Casa Dentalis не виден ни в рекламе, ни в органике — при том что клиника работает с Invisalign. Причина: страница Invisalign — архив статей, а не лендинг.</p>
+    <div class="screenshots-row">
+      <div class="screenshot-wrap"><img src="img/image10.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Реклама и органика</div></div>
+      <div class="screenshot-wrap"><img src="img/image11.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Maps-блок</div></div>
+    </div>
+  </div>
+
+  <!-- 3.4 -->
+  <div class="subsection">
+    <h3 class="sub-h"><span class="sub-num">3.4</span>«Veneers Berlin»</h3>
+    <p class="sub-analysis">Запрос с высоким средним чеком (800–1 500 € за единицу). В выдаче доминируют клиники с before/after галереями. Casa Dentalis с текстовой страницей без фотографий проигрывает визуально.</p>
+    <div class="screenshots-row">
+      <div class="screenshot-wrap"><img src="img/image12.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Выдача Google</div></div>
+      <div class="screenshot-wrap"><img src="img/image13.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Местная выдача</div></div>
+    </div>
+  </div>
+
+  <!-- 3.5 -->
+  <div class="subsection">
+    <span class="status-badge green">● Возможность</span>
+    <h3 class="sub-h"><span class="sub-num">3.5</span>«Zahnarzt Notdienst Berlin»</h3>
+    <p class="sub-analysis">Здесь Casa Dentalis конкурентоспособен. Работа 364 дня в году, 7:30–21:00, включая воскресенья — это сильное УТП для экстренного запроса. Пациент с острой болью при правильном маршруте становится постоянным.</p>
+    <div class="screenshots-row three">
+      <div class="screenshot-wrap"><img src="img/image14.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Выдача (1/3)</div></div>
+      <div class="screenshot-wrap"><img src="img/image15.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Выдача (2/3)</div></div>
+      <div class="screenshot-wrap"><img src="img/image16.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Выдача (3/3)</div></div>
+    </div>
+  </div>
+
+  <!-- 3.6 -->
+  <div class="subsection">
+    <span class="status-badge green">● Возможность</span>
+    <h3 class="sub-h"><span class="sub-num">3.6</span>«Angstpatient Zahnarzt Berlin»</h3>
+    <p class="sub-analysis">Ценная недооценённая ниша. Пациенты с дентофобией часто откладывают лечение годами и приходят с запущенными случаями, требующими дорогостоящего лечения. Casa Dentalis предлагает седацию закисью азота и общий наркоз — сильное предложение, которое сейчас не продвигается.</p>
+    <div class="screenshot-wrap">
+      <img src="img/image17.png" alt="" onclick="openLB(this)"/>
+      <div class="screenshot-caption">Google — «Angstpatient Zahnarzt Berlin»</div>
+    </div>
+  </div>
+
+  <!-- 3.7 -->
+  <div class="subsection">
+    <span class="status-badge red">● Потери</span>
+    <h3 class="sub-h"><span class="sub-num">3.7</span>«English speaking dentist Berlin»</h3>
+    <p class="sub-analysis">Casa Dentalis имеет англоязычную версию сайта — но не появляется ни в рекламе, ни в органике по этому запросу. Экспаты — аудитория с высоким доходом: специалисты из США, Великобритании, Израиля, ОАЭ. Платят наличными или по частной страховке.</p>
+    <div class="screenshots-row">
+      <div class="screenshot-wrap"><img src="img/image18.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Выдача (1/2)</div></div>
+      <div class="screenshot-wrap"><img src="img/image19.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Выдача (2/2)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     3. КОНКУРЕНТЫ
+════════════════════════════════════════════════════════ -->
+<section id="competitors" class="section">
+  <div class="section-label">03</div>
+  <h2 class="section-h">Конкурентный <em>анализ</em></h2>
+  <p class="section-intro">Сравниваем Casa Dentalis с основными конкурентами: кто агрессивнее продвигает имплантацию, Invisalign, эстетику и какие офферы используют.</p>
+
+  <!-- KU64 -->
+  <div class="comp-card">
+    <div class="comp-name">KU64 — Die Zahnspezialisten</div>
+    <div class="comp-addr">Kurfürstendamm 64, Berlin-Charlottenburg</div>
+    <div class="comp-meta">
+      <div class="comp-meta-item"><div class="comp-meta-label">Масштаб</div><div class="comp-meta-val">32 стоматолога, 200+ сотрудников, 2 800 кв.м., архитекторы GRAFT</div></div>
+      <div class="comp-meta-item"><div class="comp-meta-label">Преимущества</div><div class="comp-meta-val">Invisalign Platinum, 7 дней в неделю, собственная лаборатория, коронки за один день</div></div>
+      <div class="comp-meta-item"><div class="comp-meta-label">Слабость</div><div class="comp-meta-val">Trustpilot: «ориентированы на прибыль, цены выше среднего»</div></div>
+      <div class="comp-meta-item"><div class="comp-meta-label">Персонал</div><div class="comp-meta-val">Мультиязычный, специальный подход к детям и тревожным пациентам</div></div>
+    </div>
+    <div class="comp-threat">Забирают платёжеспособных пациентов на Invisalign и эстетику в центре и западе Берлина</div>
+    <div class="screenshot-wrap">
+      <img src="img/image20.png" alt="KU64" onclick="openLB(this)"/>
+      <div class="screenshot-caption">ku64.de — premium-упаковка конкурента</div>
+    </div>
+  </div>
+
+  <!-- Dental21 -->
+  <div class="comp-card">
+    <div class="comp-name">Dental21 — 6 клиник в Берлине</div>
+    <div class="comp-addr">Schöneberg · Kudamm · Pankow · Marzahn · Charlottenburg · Friedrichshain</div>
+    <div class="comp-meta">
+      <div class="comp-meta-item"><div class="comp-meta-label">Позиционирование</div><div class="comp-meta-val">"Modern and patient-friendly" — прямой конкурент за ту же аудиторию</div></div>
+      <div class="comp-meta-item"><div class="comp-meta-label">Технологии</div><div class="comp-meta-val">3D-интраоральные сканеры, DVT, онлайн-запись без лишних документов</div></div>
+      <div class="comp-meta-item"><div class="comp-meta-label">Персонал</div><div class="comp-meta-val">40+ стоматологов, EN · FR · ES · TR · DE</div></div>
+      <div class="comp-meta-item"><div class="comp-meta-label">Суббота</div><div class="comp-meta-val">Работают по субботам на всех точках</div></div>
+    </div>
+    <div class="comp-threat">Активно рекламируются по имплантам и Invisalign в Mitte и Charlottenburg — районах без клиник Casa Dentalis</div>
+    <div class="screenshots-row">
+      <div class="screenshot-wrap"><img src="img/image21.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">dental21.de — шесть берлинских локаций</div></div>
+      <div class="screenshot-wrap"><img src="img/image22.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">dental21-kudamm.de — страница услуг</div></div>
+    </div>
+  </div>
+
+  <!-- BISS45 -->
+  <div class="comp-card">
+    <div class="comp-name">BISS45 — Invisalign-специалист</div>
+    <div class="comp-addr">Berlin-Mitte + Charlottenburg · 2 локации</div>
+    <div class="comp-meta">
+      <div class="comp-meta-item"><div class="comp-meta-label">Факты</div><div class="comp-meta-val">25 000+ Invisalign-лечений, рейтинг 4.9★, EUMAA-сертификация</div></div>
+      <div class="comp-meta-item"><div class="comp-meta-label">Ключевой оффер</div><div class="comp-meta-val">Бесплатный 3D-скан + консультация, рассрочка от 150 €/мес, Top-5 Jameda</div></div>
+      <div class="comp-meta-item"><div class="comp-meta-label">Конверсия</div><div class="comp-meta-val">6+ точек записи, видео-отзывы, before/after, детальные цены на странице</div></div>
+      <div class="comp-meta-item"><div class="comp-meta-label">Сертификации</div><div class="comp-meta-val">EUMAA, Jameda Top-5, Ambassador of Excellence</div></div>
+    </div>
+    <div class="comp-threat">Лучший в Берлине лендинг по Invisalign — конвейер заявок, пока Casa Dentalis показывает блог 2019 года</div>
+    <div class="screenshots-row">
+      <div class="screenshot-wrap"><img src="img/image23.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">biss45.de — сильный Invisalign-лендинг</div></div>
+      <div class="screenshot-wrap"><img src="img/image24.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Структура: цены, 3D-скан, отзывы</div></div>
+    </div>
+    <div class="callout red">
+      <p><strong>Страница Invisalign Casa Dentalis — блог 2019 года.</strong> Страница Invisalign BISS45 — конверсионный лендинг с ценами, рассрочкой от 150 €/мес и бесплатным 3D-сканом. Пациент, открывший обе страницы, выбирает BISS45.</p>
+    </div>
+  </div>
+
+  <!-- Comparison table -->
+  <h3 class="sub-h" style="margin-top:48px;margin-bottom:16px">Сравнительная таблица</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr>
+        <th>Параметр</th>
+        <th>Casa Dentalis</th>
+        <th>KU64</th>
+        <th>Dental21</th>
+        <th>BISS45</th>
+        <th>AllDent</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Клиник в Берлине</td><td class="td-cd">6</td><td>3</td><td>6</td><td>2</td><td>1</td></tr>
+        <tr><td>Лендинг Invisalign</td><td class="td-bad">Блог 2019</td><td class="td-good">Сильный</td><td class="td-good">Есть</td><td class="td-good">ЛУЧШИЙ</td><td class="td-good">Есть</td></tr>
+        <tr><td>Цены на сайте</td><td class="td-bad">—</td><td class="td-bad">—</td><td class="td-amber">Частично</td><td class="td-good">Да</td><td class="td-amber">Частично</td></tr>
+        <tr><td>Before / After</td><td class="td-bad">—</td><td class="td-good">Да</td><td class="td-good">Да</td><td class="td-good">Да</td><td class="td-amber">Частично</td></tr>
+        <tr><td>Бесплатный 3D-скан</td><td class="td-bad">—</td><td>—</td><td>—</td><td class="td-good">Да</td><td>—</td></tr>
+        <tr><td>Рассрочка на сайте</td><td class="td-amber">Упомин.</td><td>—</td><td>—</td><td class="td-good">От 150 €/мес</td><td>—</td></tr>
+        <tr><td>Instagram</td><td class="td-bad">~1 600</td><td class="td-good">~20 000+</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>Работа в вых.</td><td class="td-good">364 дня</td><td class="td-good">7 дней</td><td class="td-amber">Суббота</td><td>—</td><td class="td-good">7 дней</td></tr>
+        <tr><td>Nobel Biocare</td><td class="td-good">Diamond</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>Своя лаборатория</td><td class="td-good">Да</td><td class="td-good">Да</td><td>—</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     4. GOOGLE MAPS
+════════════════════════════════════════════════════════ -->
+<section id="maps" class="section">
+  <div class="section-label">04</div>
+  <h2 class="section-h">Google Maps &amp; <em>локальный поиск</em></h2>
+  <p class="section-intro">Casa Dentalis — сеть клиник: локальная видимость в Maps напрямую влияет на поток пациентов без рекламных расходов.</p>
+
+  <div class="sw-grid" style="margin-bottom:32px">
+    <div class="sw-col">
+      <div class="sw-col-title green">✔ Сильные стороны</div>
+      <div class="sw-item ok"><span class="sw-icon">✔</span>Карточки GBP есть у каждой из 6 локаций</div>
+      <div class="sw-item ok"><span class="sw-icon">✔</span>Рейтинг 5★ — сильный сигнал доверия</div>
+      <div class="sw-item ok"><span class="sw-icon">✔</span>330+ Google-отзывов суммарно по всем точкам</div>
+    </div>
+    <div class="sw-col">
+      <div class="sw-col-title red">✗ Пробелы</div>
+      <div class="sw-item warn"><span class="sw-icon">✗</span>Полнота заполнения карточек неизвестна: услуги, фото, Q&amp;A, атрибуты</div>
+      <div class="sw-item warn"><span class="sw-icon">✗</span>Вероятна разница в видимости между локациями</div>
+      <div class="sw-item warn"><span class="sw-icon">✗</span>В районах без клиник (Charlottenburg, Mitte, Tempelhof) — Casa Dentalis не виден в Maps</div>
+    </div>
+  </div>
+
+  <div class="screenshots-row">
+    <div class="screenshot-wrap"><img src="img/image25.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Google Maps — «Zahnarzt Berlin»</div></div>
+    <div class="screenshot-wrap"><img src="img/image26.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">«Zahnarzt Berlin» — ближний план</div></div>
+  </div>
+  <div class="screenshots-row">
+    <div class="screenshot-wrap"><img src="img/image27.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">«Zahnimplantate Berlin» (1/2)</div></div>
+    <div class="screenshot-wrap"><img src="img/image28.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">«Zahnimplantate Berlin» (2/2)</div></div>
+  </div>
+  <div class="screenshots-row three">
+    <div class="screenshot-wrap"><img src="img/image29.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Карточка GBP — Lichterfelde</div></div>
+    <div class="screenshot-wrap"><img src="img/image30.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">GBP Lichterfelde — отзывы</div></div>
+    <div class="screenshot-wrap"><img src="img/image31.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">GBP — дополнительные данные</div></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     5. AI/GEO
+════════════════════════════════════════════════════════ -->
+<section id="ai" class="section">
+  <div class="section-label">05</div>
+  <h2 class="section-h">AI/GEO-аудит — <em>новый канал 2026</em></h2>
+  <p class="section-intro">В 2025–2026 году значительная часть пользователей ищет стоматолога через ChatGPT, Perplexity и Google AI Overviews. AI выдаёт один ответ вместо страницы ссылок. Попасть туда — получить клиента. Не попасть — стать невидимым.</p>
+
+  <div class="sw-col" style="margin-bottom:32px">
+    <div class="sw-col-title red">✗ Текущее состояние</div>
+    <div class="sw-item warn"><span class="sw-icon">✗</span>Casa Dentalis НЕ появляется в AI-ответах на ключевые запросы</div>
+    <div class="sw-item warn"><span class="sw-icon">✗</span>В форумах для берлинских экспатов Casa Dentalis не упоминается</div>
+    <div class="sw-item warn"><span class="sw-icon">✗</span>На сайте нет FAQ по услугам, нет structured data (Schema.org), нет детальных страниц врачей</div>
+  </div>
+
+  <div class="screenshots-row">
+    <div class="screenshot-wrap"><img src="img/image32.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">ChatGPT — «best dentist Berlin for implants» — Casa Dentalis не упоминается</div></div>
+    <div class="screenshot-wrap"><img src="img/image33.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">ChatGPT — «best dental clinic Berlin Invisalign»</div></div>
+  </div>
+  <div class="screenshots-row">
+    <div class="screenshot-wrap"><img src="img/image34.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Perplexity — «English speaking dentist Berlin»</div></div>
+    <div class="screenshot-wrap"><img src="img/image35.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Google AI Overview — «Zahnarzt Berlin Implantate»</div></div>
+  </div>
+  <div class="screenshot-wrap" style="margin-top:16px">
+    <img src="img/image36.png" alt="" onclick="openLB(this)"/>
+    <div class="screenshot-caption">ChatGPT — «Zahnarzt Berlin Angstpatienten»</div>
+  </div>
+
+  <h3 class="sub-h" style="margin-top:40px;margin-bottom:16px">Что дают конкуренты AI — чего нет у Casa Dentalis</h3>
+  <ul class="ai-gap-list">
+    <li><strong>KU64:</strong> Детальная страница «Welcome to KU64» с историей и философией клиники — AI любит такие страницы с контекстом</li>
+    <li><strong>BISS45:</strong> 25 000 процедур + профессиональные сертификации + 50+ FAQ — мощный AI-сигнал доверия и экспертизы</li>
+    <li><strong>Casa Dentalis:</strong> Нет FAQ по ключевым услугам, нет детальных страниц врачей с регалиями, нет упоминаний в берлинских медиа</li>
+  </ul>
+
+  <div class="callout blue">
+    <p>AI-видимость — канал, который большинство конкурентов ещё не использует системно. <strong>Casa Dentalis может стать первопроходцем в этом сегменте</strong> — и это не требует рекламного бюджета, только контентной работы.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     6. НАЙМ
+════════════════════════════════════════════════════════ -->
+<section id="hiring" class="section">
+  <div class="section-label">06</div>
+  <h2 class="section-h">Digital-видимость <em>по найму</em></h2>
+  <p class="section-intro">В Берлине острая нехватка ZFA, стоматологов и зубных техников. Маркетинг может решать эту задачу так же эффективно, как задачу с пациентами — и часто дешевле.</p>
+
+  <div class="sw-grid" style="margin-bottom:32px">
+    <div class="sw-col">
+      <div class="sw-col-title green">✔ Есть</div>
+      <div class="sw-item ok"><span class="sw-icon">✔</span>Раздел Karriere на сайте существует</div>
+      <div class="sw-item ok"><span class="sw-icon">✔</span>8+ открытых вакансий на момент аудита</div>
+      <div class="sw-item ok"><span class="sw-icon">✔</span>LinkedIn-страница есть</div>
+    </div>
+    <div class="sw-col">
+      <div class="sw-col-title red">✗ Проблемы</div>
+      <div class="sw-item warn"><span class="sw-icon">✗</span>По запросам «ZFA Job Berlin» Casa Dentalis не виден</div>
+      <div class="sw-item warn"><span class="sw-icon">✗</span>AllDent имеет выделенный сайт alldent-karriere.de</div>
+      <div class="sw-item warn"><span class="sw-icon">✗</span>Карьерная страница не объясняет преимущества кандидату</div>
+      <div class="sw-item warn"><span class="sw-icon">✗</span>Нет рекламных кампаний на рекрутинг</div>
+    </div>
+  </div>
+
+  <div class="screenshots-row">
+    <div class="screenshot-wrap"><img src="img/image37.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Google — «ZFA Job Berlin» — рекламная выдача</div></div>
+    <div class="screenshot-wrap"><img src="img/image38.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">«ZFA Job Berlin» — органика</div></div>
+  </div>
+  <div class="screenshots-row three">
+    <div class="screenshot-wrap"><img src="img/image39.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">casa-dentalis.de — раздел Karriere</div></div>
+    <div class="screenshot-wrap"><img src="img/image40.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Страница вакансий</div></div>
+    <div class="screenshot-wrap"><img src="img/image41.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Детали страницы Karriere</div></div>
+  </div>
+
+  <div class="subsection" style="margin-top:40px">
+    <h3 class="sub-h">Пример конкурента: AllDent Karriere</h3>
+    <p class="sub-analysis">AllDent выделил отдельный домен для найма сотрудников. Это отдельный маркетинговый актив, работающий круглосуточно. Casa Dentalis с 6 клиниками и постоянной потребностью в персонале может сделать то же самое.</p>
+    <div class="screenshots-row">
+      <div class="screenshot-wrap"><img src="img/image42.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">alldent-karriere.de — выделенный сайт для найма</div></div>
+      <div class="screenshot-wrap"><img src="img/image43.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Страница конкретного города</div></div>
+    </div>
+    <div class="screenshots-row">
+      <div class="screenshot-wrap"><img src="img/image44.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Оффер для кандидатов</div></div>
+      <div class="screenshot-wrap"><img src="img/image45.png" alt="" onclick="openLB(this)"/><div class="screenshot-caption">Категории вакансий</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     7. ПЛАН 90 ДНЕЙ
+════════════════════════════════════════════════════════ -->
+<section id="plan" class="section">
+  <div class="section-label">07</div>
+  <h2 class="section-h">План роста — <em>90 дней</em></h2>
+  <p class="section-intro">Конкретные действия в порядке приоритета. Первые 30 дней — фундамент без которого бюджет будет работать вхолостую.</p>
+
+  <div class="plan-grid">
+    <div class="plan-phase">
+      <div class="plan-phase-label">0–30 дней</div>
+      <div class="plan-phase-title">Фундамент</div>
+      <div class="plan-item"><div class="plan-dot"></div><span>Аудит и настройка GA4 + GTM: формы, телефонные клики, онлайн-записи</span></div>
+      <div class="plan-item"><div class="plan-dot"></div><span>Новые лендинги под импланты, Invisalign, виниры — с ценами «от…», до/после, CTA</span></div>
+      <div class="plan-item"><div class="plan-dot"></div><span>Ключевой оффер: бесплатная консультация или 3D-скан</span></div>
+      <div class="plan-item"><div class="plan-dot"></div><span>Первые Google Search-кампании: импланты + Invisalign, юг Берлина</span></div>
+      <div class="plan-item"><div class="plan-dot"></div><span>Оптимизация 3 карточек Google Business Profile</span></div>
+    </div>
+    <div class="plan-phase">
+      <div class="plan-phase-label">30–60 дней</div>
+      <div class="plan-phase-title">Масштаб</div>
+      <div class="plan-item"><div class="plan-dot"></div><span>Кампании «English speaking dentist Berlin» — экспаты, низкая конкуренция</span></div>
+      <div class="plan-item"><div class="plan-dot"></div><span>Отдельные кампании под Invisalign</span></div>
+      <div class="plan-item"><div class="plan-dot"></div><span>Ретаргетинг на посетителей страниц дорогих услуг</span></div>
+      <div class="plan-item"><div class="plan-dot"></div><span>Страницы врачей: имена, фото, специализация, регалии</span></div>
+      <div class="plan-item"><div class="plan-dot"></div><span>FAQ под каждое дорогое направление: 30–50 вопросов (AI/SEO)</span></div>
+    </div>
+    <div class="plan-phase">
+      <div class="plan-phase-label">60–90 дней</div>
+      <div class="plan-phase-title">AI и найм</div>
+      <div class="plan-item"><div class="plan-dot"></div><span>AI/GEO-оптимизация: Schema.org, упоминания в берлинских медиа</span></div>
+      <div class="plan-item"><div class="plan-dot"></div><span>Recruitment-кампании: ZFA, Zahnarzt, Zahntechniker</span></div>
+      <div class="plan-item"><div class="plan-dot"></div><span>Расширение на Charlottenburg и Berlin Mitte</span></div>
+      <div class="plan-item"><div class="plan-dot"></div><span>Performance Max под эстетику для look-alike аудиторий</span></div>
+      <div class="plan-item"><div class="plan-dot"></div><span>Итоговый отчёт: какие направления дают заявки с нужным чеком</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     8. КЛЮЧЕВЫЕ ТЕЗИСЫ
+════════════════════════════════════════════════════════ -->
+<section id="summary" class="section">
+  <div class="section-label">08</div>
+  <h2 class="section-h">Ключевые <em>тезисы</em></h2>
+  <p class="section-intro">Пять главных выводов аудита для финального разговора с владельцем.</p>
+
+  <div class="takeaway-grid">
+    <div class="takeaway-card">
+      <div class="takeaway-num">01</div>
+      <div class="takeaway-title">Nobel Biocare Diamond — редкий актив</div>
+      <div class="takeaway-body">Один из немногих берлинских Diamond Partner. Этот статус необходимо выносить в заголовки рекламы и первые экраны посадочных страниц. Сейчас он спрятан на странице имплантов.</div>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">02</div>
+      <div class="takeaway-title">Invisalign: отставание критическое</div>
+      <div class="takeaway-body">BISS45 получает заявки с рассрочкой от 150 €/мес и бесплатным 3D-сканом. У Casa Dentalis — архив статей 2019 года. Это потеря нескольких десятков заявок в месяц по одному только запросу.</div>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">03</div>
+      <div class="takeaway-title">Экспат-сегмент: деньги лежат на полу</div>
+      <div class="takeaway-body">По запросу «English speaking dentist Berlin» Casa Dentalis нет ни в рекламе, ни в гайдах для экспатов. Сайт уже переведён на английский — нужна только кампания и оптимизированная страница.</div>
+    </div>
+    <div class="takeaway-card">
+      <div class="takeaway-num">04</div>
+      <div class="takeaway-title">ChatGPT не знает о Casa Dentalis</div>
+      <div class="takeaway-body">AI рекомендует KU64 и Dental21 на вопросы об имплантах в Берлине. Это новый канал, который большинство конкурентов ещё не использует системно — Casa Dentalis может стать первопроходцем.</div>
+    </div>
+    <div class="takeaway-card featured">
+      <div class="takeaway-num">05</div>
+      <div>
+        <div class="takeaway-title">Бюджет без аналитики — риск</div>
+        <div class="takeaway-body">Запустить 15 000–20 000 € в месяц без настроенного GA4 и GTM — значит тратить деньги, не имея возможности доказать ROI. <strong>Первый шаг — настройка трекинга.</strong> Только потом бюджет работает как инвестиция, а не как расход.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Подготовлено для встречи с владельцем Casa Dentalis · Берлин, май 2026</span>
+  <span>Конфиденциально</span>
+</footer>
+
+</main>
+
+<script>
+// ── Progress bar ──
+const bar = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const d = document.documentElement;
+  const pct = d.scrollTop / (d.scrollHeight - d.clientHeight) * 100;
+  bar.style.width = pct + '%';
+});
+
+// ── Intersection observer for sections ──
+const sections = document.querySelectorAll('.section');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, { threshold: 0.05 });
+sections.forEach(s => io.observe(s));
+
+// ── Active nav link ──
+const navLinks = document.querySelectorAll('.nav-link');
+const allSections = document.querySelectorAll('section[id]');
+const navObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`.nav-link[href="#${e.target.id}"]`);
+      if(active) active.classList.add('active');
+    }
+  });
+}, { rootMargin:'-40% 0px -55% 0px' });
+allSections.forEach(s => navObserver.observe(s));
+
+// ── Lightbox ──
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+function openLB(img) {
+  lbImg.src = img.src;
+  lb.classList.add('open');
+}
+function closeLB() { lb.classList.remove('open') }
+lb.addEventListener('click', e => { if(e.target === lb) closeLB() });
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeLB() });
+</script>
+</body>
+</html>
